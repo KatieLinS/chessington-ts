@@ -16,11 +16,11 @@ export default class Queen extends Piece {
 
         // Move Laterally
         const getLateralMovements = new GetLateralMovements();
-        getLateralMovements.getAvailableMoves(availableMoves, currentSquare);
+        getLateralMovements.getAvailableMoves(board, availableMoves, currentSquare);
 
         // Move Diagonally
         const getDiagonalMovement = new GetDiagonalMovements();
-        getDiagonalMovement.getAvailableMoves(availableMoves, currentSquare)
+        getDiagonalMovement.getAvailableMoves(board, availableMoves, currentSquare)
 
         return availableMoves;
     }

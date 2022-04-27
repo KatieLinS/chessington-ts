@@ -14,7 +14,7 @@ export default class Bishop extends Piece {
         const availableMoves: Square[] = [];
 
         const getDiagonalMovement = new GetDiagonalMovements();
-        getDiagonalMovement.getAvailableMoves(availableMoves, currentSquare)
+        getDiagonalMovement.getAvailableMoves(board, availableMoves, currentSquare)
 
         return availableMoves;
     }

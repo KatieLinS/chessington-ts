@@ -14,7 +14,7 @@ export default class Rook extends Piece {
         const availableMoves: Square[] = [];
 
         const getLateralMovements = new GetLateralMovements();
-        getLateralMovements.getAvailableMoves(availableMoves, currentSquare);
+        getLateralMovements.getAvailableMoves(board, availableMoves, currentSquare);
 
         return availableMoves;
     }

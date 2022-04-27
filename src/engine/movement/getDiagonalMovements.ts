@@ -1,7 +1,8 @@
 import Square from "../square";
+import Board from "../board";
 
 export default class GetDiagonalMovements {
-    getAvailableMoves(availableMoves: Square[], currentSquare: Square) {
+    getAvailableMoves(board:Board, availableMoves: Square[], currentSquare: Square) {
         let rowNum: number = 1, colNum: number = 1;
         let availableMove: Square;
         while (rowNum <= 7 && colNum <= 7) {
