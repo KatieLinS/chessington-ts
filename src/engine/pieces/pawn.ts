@@ -25,18 +25,18 @@ export default class Pawn extends Piece {
     }
 
     private addAvailableMoves(board:Board, availableMoves: Square[], currentSquare: Square, checkRowNumber: number, direction: number) {
-        // White can only move one square up if they have already moved
-        // Black can only move one square down if they have already moved
+        // White / Black can only move one square up / down if they have already moved
         let availableMove = Square.at(currentSquare.row + 1 * direction, currentSquare.col);
 
-        if(availableMove.isEmpty(board)){
-            availableMoves.push(availableMove);
-            // White can move one or two squares up on their first move
-            // Black can move one or two squares down on their first move
-            if (currentSquare.row === checkRowNumber) {
-                availableMove = Square.at(currentSquare.row + 2 * direction, currentSquare.col);
-                if(availableMove.isEmpty(board)) {
-                    availableMoves.push(availableMove);
+        if(availableMove.isWithinBoard()){
+            if(availableMove.isEmpty(board)){
+                availableMoves.push(availableMove);
+                // White / Black can move one or two squares up / down on their first move
+                if (currentSquare.row === checkRowNumber) {
+                    availableMove = Square.at(currentSquare.row + 2 * direction, currentSquare.col);
+                    if(availableMove.isEmpty(board)) {
+                        availableMoves.push(availableMove);
+                    }
                 }
             }
         }
