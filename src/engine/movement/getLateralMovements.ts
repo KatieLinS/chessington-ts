@@ -3,7 +3,6 @@ import Board from "../board";
 
 export default class GetLateralMovements {
     getAvailableMoves(board: Board, availableMoves: Square[], currentSquare: Square) {
-
         this.getVerticalAvailableMoves(board, availableMoves, currentSquare, 1); // up
         this.getVerticalAvailableMoves(board, availableMoves, currentSquare, -1); // down
         this.getHorizontalAvailableMoves(board, availableMoves, currentSquare,  1); // left
