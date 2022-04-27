@@ -3,33 +3,29 @@ import Square from "../square";
 export default class GetDiagonalMovements {
     getAvailableMoves(availableMoves: Square[], currentSquare: Square) {
         let rowNum: number = 1, colNum: number = 1;
-        let availableSquare: Square;
+        let availableMove: Square;
         while (rowNum <= 7 && colNum <= 7) {
             // Forwards diagonal
-            availableSquare = Square.at(currentSquare.row - rowNum, currentSquare.col - colNum)
-            if (this.checkAvailableSquareIsWithinBoard(availableSquare)){
-                availableMoves.push(availableSquare);
+            availableMove = Square.at(currentSquare.row - rowNum, currentSquare.col - colNum)
+            if (availableMove.isWithinBoard()){
+                availableMoves.push(availableMove);
             }
-            availableSquare = Square.at(currentSquare.row + rowNum, currentSquare.col + colNum)
-            if (this.checkAvailableSquareIsWithinBoard(availableSquare)){
-                availableMoves.push(availableSquare);
+            availableMove = Square.at(currentSquare.row + rowNum, currentSquare.col + colNum)
+            if (availableMove.isWithinBoard()){
+                availableMoves.push(availableMove);
             }
 
             // Backwards diagonal
-            availableSquare = Square.at(currentSquare.row - rowNum, currentSquare.col + colNum)
-            if (this.checkAvailableSquareIsWithinBoard(availableSquare)){
-                availableMoves.push(availableSquare);
+            availableMove = Square.at(currentSquare.row - rowNum, currentSquare.col + colNum)
+            if (availableMove.isWithinBoard()){
+                availableMoves.push(availableMove);
             }
-            availableSquare = Square.at(currentSquare.row + rowNum, currentSquare.col - colNum)
-            if (this.checkAvailableSquareIsWithinBoard(availableSquare)){
-                availableMoves.push(availableSquare);
+            availableMove = Square.at(currentSquare.row + rowNum, currentSquare.col - colNum)
+            if (availableMove.isWithinBoard()){
+                availableMoves.push(availableMove);
             }
             rowNum++;
             colNum++;
         }
-    }
-
-    private checkAvailableSquareIsWithinBoard(square: Square): boolean {
-        return square.row >= 0 && square.col >= 0 && square.row <= 7 && square.col <= 7
     }
 }

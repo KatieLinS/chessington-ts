@@ -13,4 +13,8 @@ export default class Square {
     toString(): string {
         return `Row ${this.row}, Col ${this.col}`;
     }
+
+    isWithinBoard(): boolean {
+        return this.row >= 0 && this.col >= 0 && this.row <= 7 && this.col <= 7
+    }
 }

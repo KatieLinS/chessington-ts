@@ -1,6 +1,7 @@
 import Piece from './piece';
 import Board from "../board";
 import Player from "../player";
+import Square from "../square";
 
 export default class Knight extends Piece {
     constructor(player: Player) {
@@ -8,6 +9,23 @@ export default class Knight extends Piece {
     }
 
     getAvailableMoves(board: Board) {
-        return new Array(0);
+        const currentSquare = board.findPiece(this)
+        const availableMoves: Square[] = [];
+        let availableMove: Square;
+
+        for (let rowNum = -2; rowNum <= 2; rowNum++) {
+            if (rowNum !== 0){
+                availableMove = Square.at(currentSquare.row + rowNum, currentSquare.col + (Math.abs(rowNum) === 2 ? 1 : 2))
+                if (availableMove.isWithinBoard()) {
+                    availableMoves.push(availableMove);
+                }
+                availableMove = Square.at(currentSquare.row + rowNum, currentSquare.col - (Math.abs(rowNum) === 2 ? 1 : 2))
+                if (availableMove.isWithinBoard()) {
+                    availableMoves.push(availableMove);
+                }
+            }
+        }
+
+        return availableMoves;
     }
 }
