@@ -29,7 +29,6 @@ describe('Rook', () => {
         board.setPiece(Square.at(1, 2), rook);
 
         const moves = rook.getAvailableMoves(board);
-        console.log(moves);
 
         moves.should.have.length(14);
     });
