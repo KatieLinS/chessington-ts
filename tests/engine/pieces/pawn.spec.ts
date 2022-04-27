@@ -71,6 +71,7 @@ describe('Pawn', () => {
 
         const moves = pawn.getAvailableMoves(board);
 
+        console.log(moves)
         moves.should.be.empty;
     });
 

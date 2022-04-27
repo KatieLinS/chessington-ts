@@ -1,3 +1,5 @@
+import Board from "./board";
+
 export default class Square {
     constructor(public row: number, public col: number) {
     }
@@ -16,5 +18,9 @@ export default class Square {
 
     isWithinBoard(): boolean {
         return this.row >= 0 && this.col >= 0 && this.row <= 7 && this.col <= 7
+    }
+
+    isEmpty(board:Board): boolean {
+        return board.getPiece(this) === undefined
     }
 }
