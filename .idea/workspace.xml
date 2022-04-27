@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec7fc9f6-2db7-4b34-9e07-a6a171b5ac0d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/engine/movement/getDiagonalMovements.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/movement/getDiagonalMovements.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/movement/getLateralMovements.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/movement/getLateralMovements.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1651048103739</updated>
       <workItem from="1651048105255" duration="12000" />
-      <workItem from="1651048174119" duration="23116000" />
+      <workItem from="1651048174119" duration="24021000" />
     </task>
     <servers />
   </component>
