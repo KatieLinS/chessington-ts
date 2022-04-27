@@ -11,8 +11,8 @@ export default class Bishop extends Piece {
     getAvailableMoves(board: Board) {
         const currentPiece = board.findPiece(this)
         const availableMoves: Square[] = [];
-        let rowNum: number = 1, colNum: number = 1;
 
+        let rowNum: number = 1, colNum: number = 1;
         while (rowNum <= 7 && colNum <= 7) {
             // Forwards diagonal
             if ((currentPiece.row - rowNum >= 0) && (currentPiece.col - colNum >= 0)){
