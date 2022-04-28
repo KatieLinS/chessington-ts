@@ -2,52 +2,35 @@ import Square from "../square";
 import Board from "../board";
 import King from "../pieces/king";
 import GetAvailableOpponents from "./getAvailableOpponents";
+import CheckEmptyOrOpponentAndAddMove from "./checkEmptyOrOpponentAndAddMove";
 
 export default class GetDiagonalMovements {
     getAvailableMoves(board:Board, availableMoves: Square[], currentSquare: Square) {
-        // Forwards diagonal
-        this.getForwardAvailableMoves(board, availableMoves, currentSquare, 1)
-        this.getForwardAvailableMoves(board, availableMoves, currentSquare, -1)
+        // Forwards diagonal moves
+        this.getForwardOrBackwardAvailableMoves(board, availableMoves, currentSquare, 1, 1)
+        this.getForwardOrBackwardAvailableMoves(board, availableMoves, currentSquare, -1, -1)
 
-        // Backwards diagonal
-        this.getBackwardAvailableMoves(board, availableMoves, currentSquare, 1)
-        this.getBackwardAvailableMoves(board, availableMoves, currentSquare, -1)
+        // Backwards diagonal moves
+        this.getForwardOrBackwardAvailableMoves(board, availableMoves, currentSquare, 1, -1)
+        this.getForwardOrBackwardAvailableMoves(board, availableMoves, currentSquare, -1, 1)
     }
 
-    private getForwardAvailableMoves(board:Board, availableMoves:Square[], currentSquare:Square, direction: number) {
+    private getForwardOrBackwardAvailableMoves(board:Board, availableMoves:Square[], currentSquare:Square, rowDirection: number, colDirection: number) {
         let blocked = false;
 
         for (let num = 1; num <= 7; num++) {
-            const availableMove = Square.at(currentSquare.row + num * direction, currentSquare.col + num * direction)
-            if(availableMove.isWithinBoard() && !blocked){
-                if (availableMove.isEmpty(board)){
-                    availableMoves.push(availableMove);
-                } else {
-                    blocked = true;
-                    const getAvailableOpponents = new GetAvailableOpponents()
-                    getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
-                }
+            const availableMove = Square.at(currentSquare.row + num * rowDirection, currentSquare.col + num * colDirection)
+
+            if(!availableMove.isWithinBoard() || blocked) {
+                continue;
             }
+
+            if (!availableMove.isEmpty(board)){
+                blocked = true;
+            }
+
+            const checkEmptyOrOpponentAndAddMove = new CheckEmptyOrOpponentAndAddMove()
+            checkEmptyOrOpponentAndAddMove.getAvailableMoves(board, availableMoves, availableMove, currentSquare)
         }
     }
-
-    private getBackwardAvailableMoves(board:Board, availableMoves:Square[], currentSquare:Square, direction: number) {
-        let blocked = false;
-
-        for (let num = 1; num <= 7; num++) {
-            const availableMove = Square.at(currentSquare.row + num * direction, currentSquare.col - num * direction)
-            if(availableMove.isWithinBoard() && !blocked){
-                if (availableMove.isEmpty(board)){
-                    availableMoves.push(availableMove);
-                } else {
-                    blocked = true;
-
-                    const getAvailableOpponents = new GetAvailableOpponents()
-                    getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
-                }
-            }
-        }
-    }
-
-
 }

@@ -21,7 +21,7 @@ export default class Pawn extends Piece {
                 this.addAvailableMoves(board, availableMoves, currentSquare, 6, -1);
                 break;
         }
-        this.checkDiagonals(board, availableMoves, currentSquare);
+        this.checkDiagonalsForOpponents(board, availableMoves, currentSquare);
 
         return availableMoves;
     }
@@ -42,11 +42,9 @@ export default class Pawn extends Piece {
                 }
             }
         }
-
-
     }
 
-    private checkDiagonals(board:Board, availableMoves: Square[], currentSquare: Square){
+    private checkDiagonalsForOpponents(board:Board, availableMoves: Square[], currentSquare: Square){
         //check diagonals
         const rowArray = new Array(-1, 1);
         const colArray = new Array(-1, 1);
@@ -56,7 +54,7 @@ export default class Pawn extends Piece {
                 if(availableMove.isWithinBoard()) {
                     if (!availableMove.isEmpty(board)) {
                         const getAvailableOpponents = new GetAvailableOpponents()
-                        getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
+                        getAvailableOpponents.getAvailableMoves(board, availableMoves, availableMove, currentSquare);
                     }
                 }
             });

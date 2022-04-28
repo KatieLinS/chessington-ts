@@ -3,6 +3,7 @@ import Board from "../board";
 import Player from "../player";
 import Square from "../square";
 import GetAvailableOpponents from "../movement/getAvailableOpponents";
+import CheckEmptyOrOpponentAndAddMove from "../movement/checkEmptyOrOpponentAndAddMove";
 
 export default class King extends Piece {
     constructor(player: Player) {
@@ -17,14 +18,8 @@ export default class King extends Piece {
             for (let colNum = -1; colNum <= 1; colNum++) {
                 const availableMove = Square.at(currentSquare.row + rowNum, currentSquare.col + colNum)
                 if (availableMove.isWithinBoard() && !availableMove.equals(currentSquare)) {
-                    if (availableMove.isWithinBoard()) {
-                        if (availableMove.isEmpty(board)){
-                            availableMoves.push(availableMove);
-                        } else {
-                            const getAvailableOpponents = new GetAvailableOpponents()
-                            getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
-                        }
-                    }
+                    const checkEmptyOrOpponentAndAddMove = new CheckEmptyOrOpponentAndAddMove()
+                    checkEmptyOrOpponentAndAddMove.getAvailableMoves(board, availableMoves, availableMove, currentSquare)
                 }
             }
         }
