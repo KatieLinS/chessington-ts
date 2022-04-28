@@ -2,6 +2,7 @@ import Piece from './piece';
 import Board from "../board";
 import Player from "../player";
 import Square from "../square";
+import GetAvailableOpponents from "../movement/getAvailableOpponents";
 
 export default class Pawn extends Piece {
     constructor(player: Player) {
@@ -14,12 +15,13 @@ export default class Pawn extends Piece {
 
         switch(this.player){
             case Player.WHITE:
-                this.addAvailableMoves(board, availableMoves, currentSquare, 1, 1)
+                this.addAvailableMoves(board, availableMoves, currentSquare, 1, 1);
                 break;
             case Player.BLACK:
-                this.addAvailableMoves(board, availableMoves, currentSquare, 6, -1)
+                this.addAvailableMoves(board, availableMoves, currentSquare, 6, -1);
                 break;
         }
+        this.checkDiagonals(board, availableMoves, currentSquare);
 
         return availableMoves;
     }
@@ -40,5 +42,24 @@ export default class Pawn extends Piece {
                 }
             }
         }
+
+
+    }
+
+    private checkDiagonals(board:Board, availableMoves: Square[], currentSquare: Square){
+        //check diagonals
+        const rowArray = new Array(-1, 1);
+        const colArray = new Array(-1, 1);
+        rowArray.forEach((rowNum)=>{
+            colArray.forEach((colNum)=>{
+                const availableMove = Square.at(currentSquare.row + rowNum, currentSquare.col + colNum);
+                if(availableMove.isWithinBoard()) {
+                    if (!availableMove.isEmpty(board)) {
+                        const getAvailableOpponents = new GetAvailableOpponents()
+                        getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
+                    }
+                }
+            });
+        });
     }
 }
