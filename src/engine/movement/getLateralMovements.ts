@@ -1,6 +1,7 @@
 import Square from "../square";
 import Board from "../board";
 import King from "../pieces/king";
+import GetAvailableOpponents from "./getAvailableOpponents";
 
 export default class GetLateralMovements {
     getAvailableMoves(board: Board, availableMoves: Square[], currentSquare: Square) {
@@ -20,7 +21,8 @@ export default class GetLateralMovements {
                     availableMoves.push(availableMove);
                 } else {
                     blocked = true;
-                    this.getAvailableOpponents(board, availableMoves, availableMove, currentSquare)
+                    const getAvailableOpponents = new GetAvailableOpponents()
+                    getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
                 }
             }
         }
@@ -36,19 +38,10 @@ export default class GetLateralMovements {
                     availableMoves.push(availableMove);
                 } else {
                     blocked = true;
-                    this.getAvailableOpponents(board, availableMoves, availableMove, currentSquare)
+                    const getAvailableOpponents = new GetAvailableOpponents()
+                    getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
                 }
             }
-        }
-    }
-
-    private getAvailableOpponents(board:Board, availableMoves:Square[], availableMove:Square, currentSquare:Square){
-        const currentPiece = board.getPiece(currentSquare);
-        const availablePiece = board.getPiece(availableMove);
-
-        // @ts-ignore
-        if(availablePiece.player !== currentPiece.player && !(availablePiece instanceof King)) {
-            availableMoves.push(availableMove);
         }
     }
 }

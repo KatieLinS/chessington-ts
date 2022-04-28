@@ -1,5 +1,7 @@
 import Square from "../square";
 import Board from "../board";
+import King from "../pieces/king";
+import GetAvailableOpponents from "./getAvailableOpponents";
 
 export default class GetDiagonalMovements {
     getAvailableMoves(board:Board, availableMoves: Square[], currentSquare: Square) {
@@ -22,6 +24,8 @@ export default class GetDiagonalMovements {
                     availableMoves.push(availableMove);
                 } else {
                     blocked = true;
+                    const getAvailableOpponents = new GetAvailableOpponents()
+                    getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
                 }
             }
         }
@@ -37,8 +41,13 @@ export default class GetDiagonalMovements {
                     availableMoves.push(availableMove);
                 } else {
                     blocked = true;
+
+                    const getAvailableOpponents = new GetAvailableOpponents()
+                    getAvailableOpponents.getAvailableOpponents(board, availableMoves, availableMove, currentSquare);
                 }
             }
         }
     }
+
+
 }
